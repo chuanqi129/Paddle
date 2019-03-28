@@ -149,8 +149,8 @@ class ConcatPrimitiveFactory {
 
  private:
   std::vector<memory::primitive_desc> srcs_pd;
-  std::vector<memory> srcs;
   std::vector<primitive::at> inputs;
+  std::vector<memory> srcs;
   boost::optional<memory> dst_mem;  // TODO(mgallus): change to std::optional
 };                                  // upon introduction of C++17 to paddle
 
@@ -213,6 +213,7 @@ class ConcatMKLDNNOpKernel : public paddle::framework::OpKernel<T> {
     output->set_mkldnn_prim_desc(concat_pd->dst_primitive_desc());
   }
 };
+
 }  // namespace operators
 }  // namespace paddle
 

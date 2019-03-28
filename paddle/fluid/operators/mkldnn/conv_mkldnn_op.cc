@@ -440,6 +440,7 @@ class ConvMKLDNNOpKernel : public paddle::framework::OpKernel<T> {
 
       std::vector<int> bias_tz;
 
+      //FIXME: force src_dt for s8 depthwise convolution (MFDNN-1226)
       auto src_md =
           platform::MKLDNNMemDesc(src_tz, src_dt, chosen_memory_format);
       auto weights_md = platform::MKLDNNMemDesc(

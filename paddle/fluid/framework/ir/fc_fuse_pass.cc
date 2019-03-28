@@ -60,6 +60,10 @@ std::unique_ptr<ir::Graph> FCFusePass::ApplyImpl(
     desc.SetOutput("Out", std::vector<std::string>({fc_out_out}));
     desc.SetAttr("in_num_col_dims", mul->Op()->GetAttr("x_num_col_dims"));
     desc.SetType("fc");
+
+  #ifdef PADDLE_WITH_MKLDNN
+      desc.SetAttr("use_mkldnn", true);
+  #endif
     auto fc_node = g->CreateOpNode(&desc);  // OpDesc will be copied.
     GraphSafeRemoveNodes(graph.get(), {mul, elementwise_add, mul_out});
 

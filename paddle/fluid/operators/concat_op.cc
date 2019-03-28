@@ -78,13 +78,10 @@ class ConcatOp : public framework::OperatorWithKernel {
       const framework::ExecutionContext &ctx) const override {
     auto input_data_type =
         framework::GetDataTypeOfVar(ctx.MultiInputVar("X")[0]);
-
 #ifdef PADDLE_WITH_MKLDNN
-    if (platform::CanMKLDNNBeUsed(ctx)) {
-      return framework::OpKernelType(input_data_type, ctx.GetPlace(),
-                                     framework::DataLayout::kMKLDNN,
-                                     framework::LibraryType::kMKLDNN);
-    }
+    return framework::OpKernelType(input_data_type, ctx.GetPlace(),
+                                   framework::DataLayout::kMKLDNN,
+                                   framework::LibraryType::kMKLDNN);
 #endif
     return framework::OpKernelType(input_data_type, ctx.GetPlace());
   }

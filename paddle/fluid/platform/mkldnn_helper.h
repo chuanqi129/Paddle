@@ -81,6 +81,11 @@ inline bool CanMKLDNNBeUsed(const framework::ExecutionContext& ctx) {
 
 template <typename Type>
 mkldnn::memory::data_type MKLDNNGetDataType() {
+  if(std::is_same<Type, uint8_t>::value){
+    return mkldnn::memory::u8;
+  }else if(std::is_same<Type, int8_t>::value){
+    return mkldnn::memory::s8;
+  }
   return mkldnn::memory::data_undef;
 }
 

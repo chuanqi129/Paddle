@@ -87,6 +87,7 @@ if(WITH_MKLDNN)
     pass_library(conv_bias_mkldnn_fuse_pass inference mkldnn)
     pass_library(conv_relu_mkldnn_fuse_pass inference mkldnn)
     pass_library(conv_elementwise_add_mkldnn_fuse_pass inference mkldnn)
+    pass_library(fc_mkldnn_pass inference mkldnn)
 endif()
 
 cc_library(fuse_elewise_add_act_pass SRCS fuse_elewise_add_act_pass.cc DEPS pass graph_pattern_detector )
@@ -118,3 +119,4 @@ if (WITH_MKLDNN)
     cc_test(test_conv_elementwise_add_mkldnn_fuse_pass SRCS mkldnn/conv_elementwise_add_mkldnn_fuse_pass_tester.cc DEPS conv_elementwise_add_mkldnn_fuse_pass)
     cc_test(test_mkldnn_placement_pass SRCS mkldnn/mkldnn_placement_pass_tester.cc DEPS mkldnn_placement_pass)
 endif ()
+
